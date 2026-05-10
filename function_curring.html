@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //Closure : x: 4
+    // function abc(x) {
+    //     //Closure : y: 5
+    //     return function xyz(y){
+    //         return function pqr(z){
+    //         //local: z: 2
+    //         return x * y * z
+    //     }
+    //     }
+    // }
+
+    // abc(4)(5)(2)
+
+//infinite curring
+    function abc1(x){
+        return function xyz1(y) {
+            if (y) return abc1(x*y)
+            return x
+        }
+    }
+
+    console.log(abc1(2)(3)(4)())
+
+
+// what is use in real world:
+
+// This is not good practice:
+//  function multiplyByTwo(x){
+//     return x * 2
+//  }
+
+//   function multiplyByThree(x){
+//     return x * 3
+//  }
+
+//   function multiplyByFour(x){
+//     return x * 4
+//  }
+
+// Right way:
+function multiplyByN(x){
+    return function(y){
+        return x * y
+    }
+}
+
+const multiplyByFour = multiplyByN(4)
+console.log(multiplyByFour(9))
+
+// curring Right way using bind method:
+function multiplyByNusingBind(x,y){
+    return x * y
+}
+
+const multiplyByTwo = multiplyByNusingBind.bind(this, 2);
+console.log(multiplyByTwo(20))
+</script>
+</html>
