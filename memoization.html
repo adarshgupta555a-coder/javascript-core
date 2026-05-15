@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memoization</title>
+</head>
+
+<body>
+    <h1>What is memoization? Implement a memoize function.</h1>
+</body>
+<script>
+/*
+Memoization ek optimization technique hai jo expensive function ke result ko cache/store kar leti hai. Agar same input dubara aaye, toh function dobara calculate nahi karta — directly cached result return kar deta hai.
+Isse performance improve hoti hai, especially recursive ya heavy calculations mein.
+*/
+
+
+    // sahi hai but cache variable ko function ke bahar rakhne se value change hone khatra hai dusre function se.
+    // let cache = {}
+    // function doHeavyCal(x){
+    //     if(cache[x]) return cache[x];
+
+    //     let startTime = Date.now();
+    //     let currentTime = startTime;
+    //     while(startTime + 1000 > currentTime){
+    //         currentTime = Date.now();
+    //         console.log("cal "+(currentTime-startTime))
+    //     }
+    //     const sqaureRoot = Math.round(Math.sqrt(x));
+    //     cache[x] = sqaureRoot;
+    //     return sqaureRoot
+    // }
+
+    // ismein closure ka use kiya for memoization.
+    // function memoizationFunction() {
+    //     let cache = {}
+    //     function doHeavyCal(x) {
+    //         if (cache[x]) return cache[x];
+
+    //         let startTime = Date.now();
+    //         let currentTime = startTime;
+    //         while (startTime + 1000 > currentTime) {
+    //             currentTime = Date.now();
+    //             console.log("cal " + (currentTime - startTime))
+    //         }
+    //         const sqaureRoot = Math.round(Math.sqrt(x));
+    //         cache[x] = sqaureRoot;
+    //         return sqaureRoot
+    //     }
+    //     return doHeavyCal
+    // }
+    // const memoization = memoizationFunction();
+    // memoization(9)
+    // memoization(4)
+
+</script>
+
+</html>
