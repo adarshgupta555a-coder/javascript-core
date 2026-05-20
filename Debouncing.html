@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debouncing</title>
+</head>
+<body>
+    <input type="text" id="input">
+    <p id="output"></p>
+</body>
+<script>
+    let input = document.getElementById("input");
+    let output = document.getElementById("output");
+    let time;
+
+    input.addEventListener("input",()=>{
+        clearTimeout(time);
+       time = setTimeout(()=>{
+            output.innerText = input.value;
+        },1000)
+    })
+</script>
+</html>
