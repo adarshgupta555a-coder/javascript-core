@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // IIFE (Immediately Invoked Function Expression) 
+    (function () {
+        console.log("IIFE")
+    }())
+
+        //  ((function(){
+        //     console.log("IIFE")
+        // }()))
+
+        + function () {
+            console.log("IIFE")
+        }()
+
+        - function () {
+            console.log("IIFE")
+        }()
+
+    ~function () {
+        console.log("IIFE")
+    }()
+
+        * function () {
+            console.log("IIFE")
+        }()
+
+        / function () {
+            console.log("IIFE")
+        }()
+
+    void function () {
+        console.log("IIFE")
+    }()
+
+    const a = function () {
+        console.log("IIFE")
+    }()
+
+    new function () {
+        console.log("IIFE")
+    }()
+
+    ! function () {
+        console.log("IIFE")
+    }()
+
+    true && function () {
+        console.log("IIFE")
+    }()
+
+    false || function () {
+        console.log("IIFE")
+    }()
+
+    true ? function () {
+        console.log("IIFE")
+    }() : ""
+
+    // this is not IIFE but act like IIFE
+    try {
+        throw function () {
+            console.log("IIFE")
+        }
+    } catch (e) {
+        e()
+    }
+
+
+    /*
+    Ye sab different tarike hain **IIFE (Immediately Invoked Function Expression)** ko execute karne ke. Main Hinglish mein samjhata hoon **kyu ye kaam karte hain**.
+
+### Pehle basic rule samjho:
+
+JavaScript mein:
+
+```js
+function(){
+   console.log("Hi")
+}
+```
+
+Ye invalid hai kyunki JS ise **Function Declaration** samajhne ki koshish karta hai aur function declaration ka naam hona chahiye.
+
+Isliye hume function ko **Expression** banana padta hai:
+
+```js
+(function(){
+   console.log("Hi")
+})()
+```
+
+Jab expression ban gaya tab uske baad `()` lagake immediately call kar diya.
+
+---
+
+### 1.
+
+```js
+(function(){
+   console.log("IIFE")
+}())
+```
+
+Aur:
+
+```js
+((function(){
+   console.log("IIFE")
+}()))
+```
+
+Extra parentheses function ko expression bana rahe hain.
+
+Output:
+
+```js
+IIFE
+```
+
+---
+
+### 2.
+
+```js
++function(){
+   console.log("IIFE")
+}()
+```
+
+Unary `+` function ko expression bana deta hai.
+
+Equivalent:
+
+```js
++(function(){...}())
+```
+
+Output:
+
+```js
+IIFE
+NaN
+```
+
+Kyun?
+
+Function return kuch nahi karta → `undefined`
+
+```js
++undefined
+```
+
+becomes:
+
+```js
+NaN
+```
+
+---
+
+### 3.
+
+```js
+-function(){
+   console.log("IIFE")
+}()
+```
+
+Output:
+
+```js
+IIFE
+NaN
+```
+
+`-undefined = NaN`
+
+---
+
+### 4.
+
+```js
+~function(){
+   console.log("IIFE")
+}()
+```
+
+Output:
+
+```js
+IIFE
+-1
+```
+
+Kyun?
+
+```js
+undefined → NaN → 0
+~0
+```
+
+Bitwise NOT:
+
+```js
+~0 = -(0+1)
+=-1
+```
+
+---
+
+### 5.
+
+```js
+*function(){
+   console.log("IIFE")
+}()
+```
+
+Ye valid nahi hai ❌
+
+Error:
+
+```js
+Unexpected token '*'
+```
+
+Kyunki `*` unary operator nahi hai.
+
+Generator function hota:
+
+```js
+function*(){}
+```
+
+par aise standalone `*function` invalid hai.
+
+---
+
+### 6.
+
+```js
+/function(){
+   console.log("IIFE")
+}()
+```
+
+Ye bhi invalid ❌
+
+JS `/` ko division ya regex samajhne lagta hai.
+
+Syntax error aayega.
+
+---
+
+### 7.
+
+```js
+void function(){
+   console.log("IIFE")
+}()
+```
+
+Output:
+
+```js
+IIFE
+undefined
+```
+
+`void` expression ko evaluate karta hai aur hamesha:
+
+```js
+undefined
+```
+
+return karta hai.
+
+---
+
+### 8.
+
+```js
+const a = function(){
+   console.log("IIFE")
+}()
+```
+
+Output:
+
+```js
+IIFE
+```
+
+Aur:
+
+```js
+console.log(a)
+```
+
+Output:
+
+```js
+undefined
+```
+
+Kyunki function call ka result store hua hai.
+
+---
+
+### 9.
+
+```js
+new function(){
+   console.log("IIFE")
+}()
+```
+
+Output:
+
+```js
+IIFE
+```
+
+`new` object create karta hai aur function constructor ki tarah execute hota hai.
+
+Equivalent:
+
+```js
+new (function(){...})
+```
+
+---
+
+### 10.
+
+```js
+!function(){
+   console.log("IIFE")
+}()
+```
+
+Output:
+
+```js
+IIFE
+true
+```
+
+Kyun?
+
+Function return:
+
+```js
+undefined
+```
+
+To:
+
+```js
+!undefined
+```
+
+becomes:
+
+```js
+true
+```
+
+---
+
+### 11.
+
+```js
+true && function(){
+   console.log("IIFE")
+}()
+```
+
+Output:
+
+```js
+IIFE
+```
+
+`&&` second operand execute karega.
+
+---
+
+### 12.
+
+```js
+false || function(){
+   console.log("IIFE")
+}()
+```
+
+Output:
+
+```js
+IIFE
+```
+
+`||` second part evaluate karega.
+
+---
+
+### 13.
+
+```js
+true
+? function(){
+    console.log("IIFE")
+}()
+: ""
+```
+
+Output:
+
+```js
+IIFE
+```
+
+Ternary operator bhi function ko expression bana raha hai.
+
+---
+
+### 14.
+
+```js
+try{
+   throw function(){
+      console.log("IIFE")
+   }
+}
+catch(e){
+   e()
+}
+```
+
+Output:
+
+```js
+IIFE
+```
+
+Yahan function throw hua:
+
+```js
+throw function(){...}
+```
+
+catch me:
+
+```js
+e()
+```
+
+call kar diya.
+
+---
+
+### Interview ka main concept:
+
+**IIFE chalane ke liye function ko expression banana padta hai.**
+
+Ye operators expression bana dete hain:
+
+```js
+()
++
+-
+!
+~
+void
+&&
+||
+?:
+new
+```
+
+Aur phir:
+
+```js
+()
+```
+
+se immediately invoke ho jata hai.
+
+Isi wajah se ye sab alag-alag IIFE tricks kaam karti hain.
+
+    
+    */
+</script>
+
+</html>
