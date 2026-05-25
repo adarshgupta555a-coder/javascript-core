@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <img alt="input-image" id="display" height="80">
+        <input type="file" id="image-file">
+    </form>
+</body>
+<script>
+    let ImageInput = document.getElementById("image-file");
+    let displayImage = document.getElementById("display");
+
+    ImageInput.addEventListener("change", (e) => {
+        //get a first file
+        let [file] = e.target.files;//it is only for submit not for preview
+        console.log(file)
+        displayImage.src = URL.createObjectURL(file);// it is only for preview not for submit
+        console.log(URL.createObjectURL(file))// it is only for preview not for submit
+    })
+
+
+    // Convert a user-selected file into a Data URI dynamically using the FileReader API.
+    // ImageInput.addEventListener('change', (event) => {
+    //     const file = event.target.files[0];
+    //     if (file) {
+    //         const reader = new FileReader();
+
+    //         // This runs once the file is fully read as text
+    //         reader.onload = (e) => {
+    //             displayImage.src = e.target.result; // target.result IS the Data URI
+    //             // displayImage.style.display = 'block';
+    //         };
+
+    //         reader.readAsDataURL(file); // Starts the conversion
+    //     }
+    // });
+</script>
+
+</html>
