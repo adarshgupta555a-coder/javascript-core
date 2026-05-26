@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoisting</title>
+</head>
+
+<body>
+    <h1>Function Hoisting</h1>
+</body>
+<script>
+    /*
+    Function Hoisting
+The function hoisting in JavaScript is a default behavior in which function declarations are moved at the top of their local scope before execution of the code. So, you can call the function in its scope before it is declared. It's important to notice that only declaration is hoisted not the initialization. So the variables or functions should have been initialized before they are used.
+Similar to the function hoisting, the variable hoisting is also a default behavior in which the variable declarations are moved at the top of their local scope. We can use the function before it has been declared.
+    */
+
+
+    add(5, 10); // 15
+    function add(x, y) {
+        return x + y;
+    }
+
+    add(5, 10); // ReferenceError: Cannot access 'add' before initialization
+    const add = function (x, y) {
+        return x + y;
+    }
+</script>
+
+</html>
