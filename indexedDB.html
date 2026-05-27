@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IndexedDB</title>
+</head>
+
+<body>
+    <h1>IndexedDB</h1>
+</body>
+
+<script>
+    const request = indexedDB.open("studentsDB", 1);
+    request.onupgradeneeded = function (e) {
+        let db = e.target.result;
+        db.createObjectStore("students", {
+            keyPath: "id"
+        })
+    }
+
+    request.onsuccess = function (e) {
+        const db = e.target.result;
+        insertData(db,{id:1,name:"Nigam",age:45})
+        readData(db)
+        updateData(db,{id:1,name:"Nigam",age:43})
+        deleteStudent(db,1)
+    }
+
+    request.onerror = function () {
+        console.log("Error")
+    }
+
+    function readData(db) {
+        const tx = db.transaction("students", "readonly");
+        let store = tx.objectStore("students")
+        let data = store.get(1);
+        data.onsuccess = (e) => {
+            console.log(data.result)
+        }
+    }
+
+    function insertData(db,data) {
+        const tx = db.transaction("students", "readwrite");
+        let store = tx.objectStore("students");
+        store.add(data)
+        console.log("data inserted")
+    }
+
+
+    function updateData(db,data) {
+        let tx = db.transaction("students", "readwrite");
+        let store = tx.objectStore("students");
+
+        store.put(data);
+
+        console.log("Student Updated");
+    }
+
+    function deleteStudent(db,num) {
+        let tx = db.transaction("students", "readwrite");
+        let store = tx.objectStore("students");
+
+        store.delete(num);
+
+        console.log("Student Deleted");
+    }
+
+</script>
+
+</html>
