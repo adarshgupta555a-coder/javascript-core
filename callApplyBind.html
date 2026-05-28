@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call Apply and Bind in javscript</title>
+</head>
+<body>
+    <h1>Call Apply and Bind in javscript</h1>
+</body>
+<script>
+let student = {
+    firstName: "adarsh",
+    lastName: "gupta",
+    age: 20
+}
+
+let teacher = {
+    firstName: "anil",
+    lastName: "pandey",
+    age: 26
+}
+
+function getEmail(...para){
+
+    // create email using object data + extra parameters
+    return this.email = 
+    `${this.firstName}${this.lastName}${para.join("").replaceAll(",","")}.gmail.com`
+}
+
+
+/*
+---------------------------------------------------
+call()
+---------------------------------------------------
+- Executes function immediately
+- Arguments pass normally (comma separated)
+- Here [5,5,"a"] becomes a single array argument
+*/
+
+console.log(getEmail.call(teacher, [5,5,"a"]))
+
+
+/*
+---------------------------------------------------
+call()
+---------------------------------------------------
+- Executes immediately
+- Second parameter can be string, number,
+  array, object, etc.
+*/
+
+console.log(getEmail.call(student, "555a"))
+
+
+/*
+---------------------------------------------------
+apply()
+---------------------------------------------------
+- Executes immediately
+- Second argument MUST be an array
+- Array elements are passed individually
+*/
+
+console.log(getEmail.apply(student, [1,2,3,4]))
+
+
+/*
+---------------------------------------------------
+bind()
+---------------------------------------------------
+- Does NOT execute immediately
+- Returns a new function
+- this value gets permanently bound
+*/
+
+let CallBind = getEmail.bind(student, [1,2,3,4])
+
+// function executes here
+console.log(CallBind())
+
+
+
+/*
+1. call()
+
+call() function ko immediately execute karta hai aur arguments comma separated deta hai.
+
+2. apply()
+
+apply() bhi function ko immediately execute karta hai.
+
+Difference bas itna hai ki arguments array me pass hote hain.
+
+3. bind()
+
+bind() function ko immediately execute nahi karta.
+
+Ye ek naya function return karta hai jisme this permanently bind ho jata hai.
+
+| Method    | Execute Immediately | Arguments            |
+| --------- | ------------------- | -------------------- |
+| `call()`  | ✅ Yes               | comma separated      |
+| `apply()` | ✅ Yes               | array                |
+| `bind()`  | ❌ No                | returns new function |
+
+
+*/
+</script>
+</html>
