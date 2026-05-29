@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Sort Algorithm</title>
+</head>
+
+<body>
+    <h1>Bubble Sort Algorithm</h1>
+</body>
+<script>
+    let arr = [2, 3, 1, 6, 7, 200, 3000, 1000];
+
+    function bubbleSort(arr) {
+
+        // Array ki total length
+        let n = arr.length;
+
+        // Check karega ki swapping hui ya nahi
+        let swapped;
+
+        // Temporary variable swapping ke liye
+        let temp;
+
+        // Outer loop
+        // Har pass ke baad ek element correct position par chala jata hai
+        for (let i = 0; i < n - 1; i++) {
+
+            // Har new pass ke start me false
+            swapped = false;
+
+            // Inner loop
+            // Adjacent elements compare karta hai
+            // n - 1 - i isliye kyunki last elements already sorted hote jaate hain
+            for (let j = 0; j < n - 1 - i; j++) {
+
+                // Agar current element next element se bada hai
+                if (arr[j] > arr[j + 1]) {
+
+                    // Swap logic [4,5] => [5,4]
+
+                    // Current value temp me store
+                    temp = arr[j];
+
+                    // Next value current position me
+                    arr[j] = arr[j + 1];
+
+                    // Temp wali value next position me
+                    arr[j + 1] = temp;
+
+                    // Swap hua hai
+                    swapped = true;
+                }
+            }
+
+            // Agar ek bhi swap nahi hua
+            // iska matlab array already sorted hai
+            // extra loops chalane ki zarurat nahi
+            if (!swapped) {
+                break;
+            }
+        }
+    }
+
+    // Function call
+    bubbleSort(arr);
+
+    // Sorted array print
+    console.log(arr);
+</script>
+
+</html>
