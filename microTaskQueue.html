@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //javascript pehle code call stack ko deta hai 
+    // jab web api ka koi code ata hai toh usko woh microTask queue mein deta hai 
+    // microTask queue FIFO (first in, first out) principle par based hai 
+    // toh sabse pehle normal code call stack run kar dega 
+    // then uske baad microTask queue se web api ka code lega woh bhi FIFO principle pe in queue mein
+    // matlab joh queue mein pehle web api ka code aya usko pehle dega call stack ko run karne ke liye 
+    function microTaskQ() {
+        console.log("start")
+        let a = Promise.resolve()
+
+        a.then(() => {
+            console.log("result")
+        })
+
+        setTimeout(() => {
+            console.log("time out")
+        }, 0)
+
+        console.log("end")
+    }
+    microTaskQ()
+
+
+    // full explanation
+    /*
+    Tumhara explanation kaafi had tak sahi hai 👍
+Bas ek important correction hai:
+
+* `Promise.then()` → **Microtask Queue** mein jata hai
+* `setTimeout()` → **Callback Queue / Macrotask Queue** mein jata hai
+* Web APIs directly microtask queue mein nahi jaati.
+
+Ab is code ko step-by-step samajhte hain:
+
+```js
+function microTaskQ(){
+    console.log("start")
+
+    let a = Promise.resolve()
+
+    a.then(()=>{
+        console.log("result")
+    })
+
+    setTimeout(()=>{
+        console.log("time out")
+    },0)
+
+    console.log("end")
+}
+
+microTaskQ()
+```
+
+## Execution Flow
+
+### 1. Function call
+
+`microTaskQ()` call stack mein gaya.
+
+---
+
+### 2. `console.log("start")`
+
+Output:
+
+```js
+start
+```
+
+---
+
+### 3. `Promise.resolve()`
+
+Promise immediately resolve ho gaya.
+
+```js
+a.then(()=>{
+   console.log("result")
+})
+```
+
+Ye callback **Microtask Queue** mein chala gaya.
+
+---
+
+### 4. `setTimeout()`
+
+```js
+setTimeout(()=>{
+   console.log("time out")
+},0)
+```
+
+Ye callback **Callback Queue (Macrotask Queue)** mein gaya.
+
+---
+
+### 5. `console.log("end")`
+
+Output:
+
+```js
+end
+```
+
+---
+
+### 6. Call Stack Empty
+
+Ab JavaScript event loop check karega:
+
+Pehle **Microtask Queue** execute hoti hai.
+
+Toh:
+
+```js
+result
+```
+
+print hoga.
+
+---
+
+### 7. Phir Callback Queue
+
+Ab `setTimeout` callback execute hoga:
+
+```js
+time out
+```
+
+---
+
+# Final Output
+
+```js
+start
+end
+result
+time out
+```
+
+## Important Rule
+
+### Priority Order
+
+1. Call Stack
+2. Microtask Queue (`Promise.then`, `queueMicrotask`, `MutationObserver`)
+3. Callback/Macrotask Queue (`setTimeout`, `setInterval`, events)
+
+Diagram:
+
+```text
+Call Stack
+   ↓
+Microtask Queue
+   ↓
+Callback Queue
+```
+
+`Promise.then()` hamesha `setTimeout()` se pehle chalega even agar timeout `0ms` ho.
+
+    
+    */
+</script>
+
+</html>
