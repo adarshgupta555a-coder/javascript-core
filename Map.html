@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map function or Object in JavaScript</title>
+</head>
+
+<body>
+    <h1>Map function or Object in JavaScript</h1>
+</body>
+<script>
+    // const user = new Map();
+
+    // user.set("name", "Adarsh");
+    // user.set("age", 20);
+    // user.set(true, "Developer");
+
+    // console.log(user);
+
+    const data = new Map([
+        ["name","Anand"],
+        [true,"any"],
+        [[],"array"],
+        [{},"object"],
+        [()=>{},"function"]
+    ])
+
+    console.log(data)
+
+    /*
+    
+    ### JavaScript `Map` Object
+
+`Map` JavaScript ka built-in data structure hai jo **key-value pairs** store karta hai.
+
+Object (`{}`) ki tarah data store karta hai, lekin `Map` mein **kisi bhi type ko key** bana sakte ho (string, number, boolean, object, function, etc.).
+
+---
+
+## Map Create Karna
+
+```javascript
+const user = new Map();
+
+user.set("name", "Adarsh");
+user.set("age", 20);
+user.set(true, "Developer");
+
+console.log(user);
+```
+
+Output:
+
+```javascript
+Map(3) {
+  'name' => 'Adarsh',
+  'age' => 20,
+  true => 'Developer'
+}
+```
+
+---
+
+## Important Methods
+
+### 1. set()
+
+Data insert karta hai.
+
+```javascript
+const map = new Map();
+
+map.set("name", "Adarsh");
+map.set("city", "Ahmedabad");
+
+console.log(map);
+```
+
+---
+
+### 2. get()
+
+Key ki value return karta hai.
+
+```javascript
+console.log(map.get("name"));
+```
+
+Output:
+
+```javascript
+Adarsh
+```
+
+---
+
+### 3. has()
+
+Check karta hai key exist karti hai ya nahi.
+
+```javascript
+console.log(map.has("city"));
+```
+
+Output:
+
+```javascript
+true
+```
+
+---
+
+### 4. delete()
+
+Specific key remove karta hai.
+
+```javascript
+map.delete("city");
+
+console.log(map);
+```
+
+---
+
+### 5. clear()
+
+Pura Map empty kar deta hai.
+
+```javascript
+map.clear();
+```
+
+---
+
+### 6. size
+
+Map mein total entries batata hai.
+
+```javascript
+const map = new Map();
+
+map.set("a", 1);
+map.set("b", 2);
+
+console.log(map.size);
+```
+
+Output:
+
+```javascript
+2
+```
+
+---
+
+## Any Type as Key
+
+Object ko bhi key bana sakte hain.
+
+```javascript
+const user = {
+  id: 1
+};
+
+const map = new Map();
+
+map.set(user, "Adarsh");
+
+console.log(map.get(user));
+```
+
+Output:
+
+```javascript
+Adarsh
+```
+
+---
+
+## Loop Through Map
+
+### for...of
+
+```javascript
+const map = new Map([
+  ["name", "Adarsh"],
+  ["age", 20]
+]);
+
+for (const [key, value] of map) {
+  console.log(key, value);
+}
+```
+
+Output:
+
+```javascript
+name Adarsh
+age 20
+```
+
+---
+
+### keys()
+
+```javascript
+for (const key of map.keys()) {
+  console.log(key);
+}
+```
+
+---
+
+### values()
+
+```javascript
+for (const value of map.values()) {
+  console.log(value);
+}
+```
+
+---
+
+### entries()
+
+```javascript
+for (const entry of map.entries()) {
+  console.log(entry);
+}
+```
+
+Output:
+
+```javascript
+['name', 'Adarsh']
+['age', 20]
+```
+
+---
+
+### forEach()
+
+```javascript
+map.forEach((value, key) => {
+  console.log(key, value);
+});
+```
+
+---
+
+## Array Se Map Banana
+
+```javascript
+const map = new Map([
+  ["name", "Adarsh"],
+  ["age", 20],
+]);
+
+console.log(map);
+```
+
+---
+
+## Map Ko Array Mein Convert Karna
+
+```javascript
+const arr = [...map];
+
+console.log(arr);
+```
+
+Output:
+
+```javascript
+[
+  ['name', 'Adarsh'],
+  ['age', 20]
+]
+```
+
+---
+
+## Object vs Map
+
+| Feature                           | Object        | Map      |
+| --------------------------------- | ------------- | -------- |
+| Key Types                         | String/Symbol | Any Type |
+| Order Maintain                    | Mostly        | Yes      |
+| Size Property                     | ❌             | ✅        |
+| Iteration Easy                    | ❌             | ✅        |
+| Performance (frequent add/remove) | Good          | Better   |
+
+---
+
+## Real-World Example
+
+```javascript
+const cart = new Map();
+
+cart.set(1, {
+  name: "Laptop",
+  price: 50000
+});
+
+cart.set(2, {
+  name: "Mouse",
+  price: 500
+});
+
+console.log(cart.get(1));
+
+cart.forEach((product, id) => {
+  console.log(id, product.name);
+});
+```
+
+### Kab Use Kare?
+
+* Jab keys dynamic ho.
+* Jab object ko key banana ho.
+* Jab insertion order maintain karna ho.
+* Jab frequently add/remove operations karne ho.
+
+Agar interview mein poocha jaye: **"Object aur Map mein sabse bada difference kya hai?"** toh jawab hoga:
+
+> **Object mein keys sirf String ya Symbol hoti hain, jabki Map mein kisi bhi data type ko key bana sakte hain.**
+
+    */
+</script>
+
+</html>
