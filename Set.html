@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set</title>
+</head>
+<body>
+    <h1>Set Object in Javascript (unique)</h1>
+</body>
+<script>
+    /*
+    Set - A collection of unique multiple data types.
+    Array - A collection of multiple data types.
+    */
+    //SET VS ARRAY
+    let data = new Set([1,2,3,4,5,1,2,3,4,"abc","xyz","abc"]);
+    let arr = [1,2,3,4,5,1,2,3,4,"abc","xyz","abc"]
+    console.log("Set: ", data);
+    console.log("Array: ", arr);
+
+    let data1 = new Set();
+    data1.add(1);
+    data1.add(2);
+    data1.add(3);
+    data1.add(1);
+    data1.add(3);
+    data1.add(2);
+    data1.add(4);
+    data1.delete(2);
+    console.log(data1)
+    console.log(data1.has(3))
+    data1.clear()
+    console.log(data1)
+    
+    // set to array
+    let data2 = new Set([1,2,3,4,4]);
+    let arr1 = [...data2]
+    console.log(arr1)
+
+    // array to set
+    let arr2 = [1,2,3,3,4];
+    let data3 = new Set(arr2);
+    console.log(data2);    
+
+    data.forEach(item => console.log(item))
+
+    for (const x of data) {
+        console.log(x)
+    }
+
+
+    /*
+    
+    # JavaScript `Set` Object
+
+`Set` JavaScript ka built-in data structure hai jo **sirf unique values** store karta hai.
+
+Agar same value multiple baar add karoge, toh Set usse sirf ek hi baar store karega.
+
+---
+
+## Set Create Karna
+
+```javascript
+const set = new Set();
+
+set.add(10);
+set.add(20);
+set.add(30);
+
+console.log(set);
+```
+
+Output:
+
+```javascript
+Set(3) { 10, 20, 30 }
+```
+
+---
+
+## Duplicate Values Ignore Hoti Hain
+
+```javascript
+const set = new Set();
+
+set.add(10);
+set.add(10);
+set.add(10);
+set.add(20);
+
+console.log(set);
+```
+
+Output:
+
+```javascript
+Set(2) { 10, 20 }
+```
+
+---
+
+## Array Se Duplicate Remove Karna
+
+Ye Set ka sabse common use-case hai.
+
+```javascript
+const arr = [1, 2, 3, 2, 4, 1, 5];
+
+const uniqueArr = [...new Set(arr)];
+
+console.log(uniqueArr);
+```
+
+Output:
+
+```javascript
+[1, 2, 3, 4, 5]
+```
+
+---
+
+## Important Methods
+
+### 1. add()
+
+Value add karta hai.
+
+```javascript
+const set = new Set();
+
+set.add("JavaScript");
+set.add("React");
+
+console.log(set);
+```
+
+---
+
+### 2. has()
+
+Check karta hai value exist karti hai ya nahi.
+
+```javascript
+console.log(set.has("React"));
+```
+
+Output:
+
+```javascript
+true
+```
+
+---
+
+### 3. delete()
+
+Specific value remove karta hai.
+
+```javascript
+set.delete("React");
+
+console.log(set);
+```
+
+---
+
+### 4. clear()
+
+Pure Set ko empty kar deta hai.
+
+```javascript
+set.clear();
+```
+
+---
+
+### 5. size
+
+Total unique values batata hai.
+
+```javascript
+const set = new Set([1, 2, 3, 4]);
+
+console.log(set.size);
+```
+
+Output:
+
+```javascript
+4
+```
+
+---
+
+## Loop Through Set
+
+### for...of
+
+```javascript
+const set = new Set([10, 20, 30]);
+
+for (const value of set) {
+  console.log(value);
+}
+```
+
+Output:
+
+```javascript
+10
+20
+30
+```
+
+---
+
+### forEach()
+
+```javascript
+set.forEach((value) => {
+  console.log(value);
+});
+```
+
+---
+
+## Set Ko Array Mein Convert Karna
+
+### Spread Operator
+
+```javascript
+const set = new Set([1, 2, 3]);
+
+const arr = [...set];
+
+console.log(arr);
+```
+
+Output:
+
+```javascript
+[1, 2, 3]
+```
+
+---
+
+## Array Ko Set Mein Convert Karna
+
+```javascript
+const arr = [1, 2, 2, 3, 3, 4];
+
+const set = new Set(arr);
+
+console.log(set);
+```
+
+Output:
+
+```javascript
+Set(4) { 1, 2, 3, 4 }
+```
+
+---
+
+## Objects Ke Saath Set
+
+Set reference check karta hai, content nahi.
+
+```javascript
+const set = new Set();
+
+const obj1 = { name: "Adarsh" };
+const obj2 = { name: "Adarsh" };
+
+set.add(obj1);
+set.add(obj2);
+
+console.log(set.size);
+```
+
+Output:
+
+```javascript
+2
+```
+
+Kyunki `obj1` aur `obj2` alag memory references hain.
+
+---
+
+## Real-World Example
+
+### Unique Visitors
+
+```javascript
+const visitors = new Set();
+
+visitors.add("user1");
+visitors.add("user2");
+visitors.add("user1");
+
+console.log(visitors.size);
+```
+
+Output:
+
+```javascript
+2
+```
+
+---
+
+## Set vs Array
+
+| Feature           | Array    | Set            |
+| ----------------- | -------- | -------------- |
+| Duplicate Allowed | ✅        | ❌              |
+| Unique Values     | ❌        | ✅              |
+| Search            | O(n)     | O(1) (average) |
+| Index Access      | ✅        | ❌              |
+| Size Property     | `length` | `size`         |
+
+---
+
+## Interview Question
+
+### Remove duplicates from an array
+
+```javascript
+const arr = [1, 2, 3, 2, 1, 4];
+
+const result = [...new Set(arr)];
+
+console.log(result);
+```
+
+Output:
+
+```javascript
+[1, 2, 3, 4]
+```
+
+**Yaad rakhne wali line:**
+
+> **Set = Unique values ka collection.**
+>
+> **Map = Key-Value pairs ka collection.**
+>
+> **Object = Traditional key-value storage.**
+>
+> **Array = Ordered list of values.**
+
+    
+    */
+</script>
+</html>
