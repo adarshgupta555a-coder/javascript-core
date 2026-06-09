@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tagged Templates</title>
+</head>
+<body>
+    <h1>Tagged Templates</h1>
+       <p id = "output"> </p>
+</body>
+<script>
+      /*
+      basic syntax
+      function format(str, exp1, exp2, ...expN) {
+    //    Format the string
+}
+
+let res = format`${exp1} abcd ${exp2}`;
+      */
+
+
+        function format(str, name) {
+         return str.join(" ") + name;
+      }
+      let name = "John";
+      //tagged template
+      let res = format`Hi ${name}, How are you?`;
+      document.getElementById("output").innerHTML = res;
+
+      /*
+      ### JavaScript Tagged Templates
+
+**Tagged Template Literals** template literals ka advanced feature hai.
+
+Normally:
+
+```javascript
+const name = "Adarsh";
+
+console.log(`Hello ${name}`);
+```
+
+Output:
+
+```javascript
+Hello Adarsh
+```
+
+Lekin Tagged Templates mein template literal ko ek function ke saath "tag" kar sakte ho.
+
+---
+
+## Basic Syntax
+
+```javascript
+function tag(strings, ...values) {
+  console.log(strings);
+  console.log(values);
+}
+
+const name = "Adarsh";
+const age = 20;
+
+tag`My name is ${name} and I am ${age} years old`;
+```
+
+Output:
+
+```javascript
+[
+  "My name is ",
+  " and I am ",
+  " years old"
+]
+
+["Adarsh", 20]
+```
+
+---
+
+## Parameters Kaise Milte Hain?
+
+For:
+
+```javascript
+tag`My name is ${name} and I am ${age} years old`
+```
+
+JavaScript internally:
+
+```javascript
+tag(
+  ["My name is ", " and I am ", " years old"],
+  name,
+  age
+);
+```
+
+call karta hai.
+
+---
+
+## Example: Custom Formatting
+
+```javascript
+function upper(strings, ...values) {
+  return strings[0] + values[0].toUpperCase() + strings[1];
+}
+
+const name = "adarsh";
+
+console.log(
+  upper`Hello ${name}!`
+);
+```
+
+Output:
+
+```javascript
+Hello ADARSH!
+```
+
+---
+
+## Example: Currency Formatter
+
+```javascript
+function currency(strings, ...values) {
+  return `${strings[0]}₹${values[0].toLocaleString()}`;
+}
+
+const price = 50000;
+
+console.log(
+  currency`Price: ${price}`
+);
+```
+
+Output:
+
+```javascript
+Price: ₹50,000
+```
+
+---
+
+## Real Implementation
+
+```javascript
+function highlight(strings, ...values) {
+  let result = "";
+
+  strings.forEach((str, index) => {
+    result += str;
+
+    if (index < values.length) {
+      result += `[${values[index]}]`;
+    }
+  });
+
+  return result;
+}
+
+const name = "Adarsh";
+const city = "Ahmedabad";
+
+console.log(
+  highlight`My name is ${name} and I live in ${city}`
+);
+```
+
+Output:
+
+```javascript
+My name is [Adarsh] and I live in [Ahmedabad]
+```
+
+---
+
+## Why Use Tagged Templates?
+
+1. **Custom String Formatting**
+2. **HTML Escaping** (XSS protection)
+3. **Internationalization (i18n)**
+4. **CSS-in-JS Libraries**
+
+Example:
+
+* styled-components
+* Lit
+
+ye libraries tagged template literals ka use karti hain.
+
+```javascript
+const Button = styled.button`
+  color: white;
+  background: blue;
+`;
+```
+
+Yahan `styled.button` ek tagged template function hai.
+
+---
+
+## Interview Definition
+
+> **Tagged Template Literal ek function call hoti hai jo template literal ke strings aur interpolated values ko alag-alag arguments ke roop mein receive karti hai, jisse hum custom string processing ya formatting kar sakte hain.**
+
+### Difference
+
+Normal Template Literal:
+
+```javascript
+`Hello ${name}`
+```
+
+Tagged Template Literal:
+
+```javascript
+tag`Hello ${name}`
+```
+
+Yahan `tag` function template ko process karega aur apni custom output return karega.
+
+      */
+</script>
+</html>

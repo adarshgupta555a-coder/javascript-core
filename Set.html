@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Set</title>
 </head>
+
 <body>
     <h1>Set Object in Javascript (unique)</h1>
 </body>
@@ -14,8 +16,8 @@
     Array - A collection of multiple data types.
     */
     //SET VS ARRAY
-    let data = new Set([1,2,3,4,5,1,2,3,4,"abc","xyz","abc"]);
-    let arr = [1,2,3,4,5,1,2,3,4,"abc","xyz","abc"]
+    let data = new Set([1, 2, 3, 4, 5, 1, 2, 3, 4, "abc", "xyz", "abc"]);
+    let arr = [1, 2, 3, 4, 5, 1, 2, 3, 4, "abc", "xyz", "abc"]
     console.log("Set: ", data);
     console.log("Array: ", arr);
 
@@ -32,16 +34,16 @@
     console.log(data1.has(3))
     data1.clear()
     console.log(data1)
-    
+
     // set to array
-    let data2 = new Set([1,2,3,4,4]);
+    let data2 = new Set([1, 2, 3, 4, 4]);
     let arr1 = [...data2]
     console.log(arr1)
 
     // array to set
-    let arr2 = [1,2,3,3,4];
+    let arr2 = [1, 2, 3, 3, 4];
     let data3 = new Set(arr2);
-    console.log(data2);    
+    console.log(data2);
 
     data.forEach(item => console.log(item))
 
@@ -355,4 +357,5 @@ Output:
     
     */
 </script>
+
 </html>
