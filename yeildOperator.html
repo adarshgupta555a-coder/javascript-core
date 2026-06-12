@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeild Operator</title>
+</head>
+<body>
+    <h1>Yeild Operator in JavaScript</h1>
+</body>
+<script>
+    //basic syntax
+   /* function* test() {
+ // function code
+ yield expression;
+}
+const genObj = test();
+genObj.next();*/
+
+//example: 
+function* test() {
+    yield 20;
+    yield [1,2,3];
+    yield "Hello World";
+}
+let res = test();
+console.log(res.next());
+console.log(res.next());
+console.log(res.next());
+console.log(res.next());
+
+//output:
+/*
+{ value: 20, done: false }
+{ value: [ 1, 2, 3 ], done: false }
+{ value: 'Hello World', done: false }
+{ value: undefined, done: true }
+*/
+
+
+
+/*
+# JavaScript `yield` Operator
+
+`yield` sirf **Generator Functions** ke andar use hota hai.
+
+Generator function execution ko **pause** aur **resume** karne ki ability deta hai.
+
+---
+
+## Generator Function
+
+Generator function `function*` se banta hai.
+
+```javascript
+function* numbers() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+```
+
+---
+
+## Basic Example
+
+```javascript
+function* numbers() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const gen = numbers();
+
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+```
+
+Output:
+
+```javascript
+{ value: 1, done: false }
+{ value: 2, done: false }
+{ value: 3, done: false }
+{ value: undefined, done: true }
+```
+
+### Kya Hua?
+
+1. `numbers()` call hone par function execute nahi hua.
+2. Ek generator object return hua.
+3. `next()` call karne par function pehle `yield` tak chala.
+4. `yield` value return karta hai aur execution pause kar deta hai.
+5. Agla `next()` wahi se resume karta hai.
+
+---
+
+## Pause & Resume Example
+
+```javascript
+function* demo() {
+  console.log("Start");
+
+  yield 1;
+
+  console.log("Middle");
+
+  yield 2;
+
+  console.log("End");
+}
+
+const gen = demo();
+
+gen.next();
+gen.next();
+gen.next();
+```
+
+Output:
+
+```javascript
+Start
+Middle
+End
+```
+
+Execution har `yield` par rukta hai.
+
+---
+
+## `yield` Value Receive Bhi Kar Sakta Hai
+
+```javascript
+function* greet() {
+  const name = yield "What is your name?";
+
+  return `Hello ${name}`;
+}
+
+const gen = greet();
+
+console.log(gen.next());
+console.log(gen.next("Adarsh"));
+```
+
+Output:
+
+```javascript
+{ value: 'What is your name?', done: false }
+
+{ value: 'Hello Adarsh', done: true }
+```
+
+---
+
+## Infinite Sequence
+
+```javascript
+function* counter() {
+  let i = 1;
+
+  while (true) {
+    yield i++;
+  }
+}
+
+const gen = counter();
+
+console.log(gen.next().value);
+console.log(gen.next().value);
+console.log(gen.next().value);
+```
+
+Output:
+
+```javascript
+1
+2
+3
+```
+
+---
+
+## Looping Through Generator
+
+```javascript
+function* colors() {
+  yield "red";
+  yield "green";
+  yield "blue";
+}
+
+for (const color of colors()) {
+  console.log(color);
+}
+```
+
+Output:
+
+```javascript
+red
+green
+blue
+```
+
+---
+
+## `yield*` Operator
+
+Ek generator ko dusre generator ke andar delegate karne ke liye.
+
+```javascript
+function* first() {
+  yield 1;
+  yield 2;
+}
+
+function* second() {
+  yield* first();
+  yield 3;
+}
+
+for (const value of second()) {
+  console.log(value);
+}
+```
+
+Output:
+
+```javascript
+1
+2
+3
+```
+
+---
+
+## Real Use Cases
+
+### 1. Custom Iterators
+
+```javascript
+function* range(start, end) {
+  for (let i = start; i <= end; i++) {
+    yield i;
+  }
+}
+
+for (const num of range(1, 5)) {
+  console.log(num);
+}
+```
+
+---
+
+### 2. Large Data Processing
+
+Generator ek-ek item lazily produce karta hai, isliye memory efficient hota hai.
+
+```javascript
+function* dataGenerator() {
+  let i = 1;
+
+  while (true) {
+    yield `Record ${i++}`;
+  }
+}
+```
+
+---
+
+## `return` vs `yield`
+
+| `yield`                         | `return`                       |
+| ------------------------------- | ------------------------------ |
+| Pause karta hai                 | Function khatam karta hai      |
+| Multiple times use ho sakta hai | Ek baar function end karta hai |
+| `done: false`                   | `done: true`                   |
+
+Example:
+
+```javascript
+function* test() {
+  yield 1;
+  return 2;
+  yield 3;
+}
+```
+
+Output:
+
+```javascript
+const gen = test();
+
+gen.next(); // { value: 1, done: false }
+gen.next(); // { value: 2, done: true }
+```
+
+`yield 3` kabhi execute nahi hoga.
+
+---
+
+### Interview One-Liner
+
+> **`yield` Generator Function ke execution ko temporarily pause karta hai aur value return karta hai. Baad mein `next()` call karne par execution wahi se resume hota hai jahan pause hua tha.**
+
+*/
+</script>
+</html>
